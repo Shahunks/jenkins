@@ -63,7 +63,7 @@ pipeline {
                 
            }
 }
-         stage('docker') {
+         stage('sonar-ng-api') {
 
           agent {
                label "Agent2"
@@ -74,7 +74,7 @@ pipeline {
            
            
 } 
-         stage('docker') {
+         stage('test-ngapi') {
             agent {
               label "Agent2"
      }
@@ -85,14 +85,14 @@ pipeline {
                
            }
 } 
-        stage('docker') {
+        stage('build-sngapi') {
              agent {
                label "Agent2"
       }
             steps {
                
                 
-                sh 'bash -c "cd ng-api-server && sh ./docker/build/shell.sh "'
+                sh 'bash -c "cd ng-api-server && sh shell.sh "'
                 
             }
         }
