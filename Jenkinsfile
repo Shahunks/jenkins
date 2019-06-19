@@ -20,7 +20,7 @@ pipeline {
         }
                 
                 
-          stage('Sonar-ngtadmin') {
+         /* stage('Sonar-ngtadmin') {
 
           agent {
                label "Agent2"
@@ -53,7 +53,7 @@ pipeline {
                
                
            }
-}   
+}   */
            
 
         stage('Build-tadmin') {
@@ -90,7 +90,7 @@ pipeline {
                 
            }
 }
-         stage('sonar-ng-api') {
+      /*   stage('sonar-ng-api') {
 
           agent {
                label "Agent2"
@@ -127,7 +127,7 @@ pipeline {
                
                
            }
-}   
+}   */
            
 
         stage('build-ngapi') {
