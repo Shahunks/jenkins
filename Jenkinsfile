@@ -30,7 +30,7 @@ pipeline {
             }  
               
           }        
-    /*     stage('test-tadmin') {
+          stage('test-tadmin') {
             agent {
               label "Agent2"
      } 
@@ -41,16 +41,16 @@ pipeline {
                
                
            }
-}     */
+}     
                stage('eslint-tadmin') {
             agent {
               label "Agent2"
      }
            steps {
-                //sh 'bash -c "sh eslist-tadmin.sh"'
+                sh 'bash -c "sh eslist-tadmin.sh"'
                
               
-               junit keepLongStdio: true, testResults: 'ng-tadmin/eslint.xml'
+               
                
            }
 }   
@@ -141,15 +141,13 @@ pipeline {
                 
             }
         }
-        
-    }
- post {
+        post {
             always {
-               recordIssues enabledForFailure: true, tools: [esLint(pattern: 'ng-tadmin/eslint.xml')]
+               recordIssues enabledForFailure: true, tools: [esLint(pattern: 'eslint.xml')]
                junit 'junit.xml'
            }
             
     }
-}
-      
+
+       
 }
