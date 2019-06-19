@@ -143,5 +143,13 @@ pipeline {
         }
         
     }
-       
+ post {
+            always {
+               recordIssues enabledForFailure: true, tools: [esLint(pattern: 'ng-tadmin/eslint.xml')]
+               junit 'junit.xml'
+           }
+            
+    }
+}
+      
 }
