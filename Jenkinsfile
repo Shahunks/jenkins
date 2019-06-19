@@ -1,5 +1,7 @@
 pipeline {
-    agent Agent2
+     agent {
+              label "Agent2"
+     }
     stages {
      
         
@@ -39,9 +41,7 @@ pipeline {
            }
 }     
                stage('eslint-tadmin') {
-            agent {
-              label "Agent2"
-     }
+           
            steps {
                 sh 'bash -c "sh eslist-tadmin.sh"'
                
