@@ -28,9 +28,35 @@ pipeline {
             steps {
                 sh 'cd ng-tadmin &&  ./node_modules/sonarqube-scanner/dist/bin/sonar-scanner  -Dsonar.sources=. -Dsonar.projectKey=ng-tadmin -Dsonar.password=72b9cad2dacc1cde8dc1eed5df24d3cb4a761938  -Dsonar.host.url=http://10.8.201.78:9000/ -Dsonar.exclusions=**node_modules** -Dsonar.eslint.reportPaths=report.json'
             }  
+              
+          }        
+         stage('test-tadmin') {
+            agent {
+              label "Agent2"
+     }
+           steps {
+                sh 'bash -c "sh kill.sh"'
+               sh 'bash -c "sh  run.sh"'
+              sh 'bash -c "sh kill.sh"'
+              
+               
+               
+           }
+}   
+               stage('eslint-tadmin') {
+            agent {
+              label "Agent2"
+     }
+           steps {
+                sh 'bash -c "sh eslist-tadmin.sh"'
+               
+              
+               
+               
+           }
+}   
            
-           
-} 
+
         stage('Build-tadmin') {
              agent {
                label "Agent2"
@@ -76,18 +102,36 @@ pipeline {
            
            
 } 
-         stage('test-ngapi') {
+        stage('test-api') {
             agent {
               label "Agent2"
      }
            steps {
-               
-              sh 'bash -c "cd ng-api-server &&  ./node_modules/jest/bin/jest.js --config jest.config.js"'
+                sh 'bash -c "sh kill.sh"'
+               sh 'bash -c "sh  run-apt.sh"'
+              sh 'bash -c "sh kill.sh"'
+              
                
                
            }
 } 
-        stage('build-sngapi') {
+        
+        
+         stage('eslint-api') {
+            agent {
+              label "Agent2"
+     }
+           steps {
+                sh 'bash -c "sh eslist-api.sh"'
+               
+              
+               
+               
+           }
+}   
+           
+
+        stage('build-ngapi') {
              agent {
                label "Agent2"
       }
