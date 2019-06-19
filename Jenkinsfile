@@ -16,6 +16,7 @@ pipeline {
                sh 'bash -c "cd ng-tadmin && npm install"'
                sh 'bash -c "cd ng-tadmin && npm install sonarqube-scanner"'
                sh 'bash -c "cd ng-tadmin &&  npm install jest"'
+               sh 'bash -c "cd ng-tadmin && npm install jest-junit"'        
             }
         }
                 
@@ -127,7 +128,8 @@ pipeline {
         
         post {
             always {
-              junit keepLongStdio: true, testResults: 'ng-tadmin/eslint.xml'
+              recordIssues enabledForFailure: true, tools: [esLint(pattern: 'ng-tadmineslint.xml')]
+                junit 'ng-tadmin/junit.xml'
            }
             
     }
