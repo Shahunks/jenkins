@@ -38,7 +38,7 @@ pipeline {
             steps {
                
               
-                sh 'bash -c "cd build-tadmin.sh "'
+                sh 'bash -c "sh build-tadmin.sh "'
                 
             }
         }
@@ -93,7 +93,7 @@ pipeline {
             steps {
                
                 
-                sh 'bash -c "cd ng-api-server && sh build-api.sh "'
+                sh 'bash -c "sh build-api.sh "'
                 
             }
         }
