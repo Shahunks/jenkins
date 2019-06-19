@@ -1,4 +1,4 @@
-pipeline {
+build-tadmin.shpipeline {
     agent none
     stages {
      
@@ -38,7 +38,7 @@ pipeline {
             steps {
                
               
-                sh 'bash -c "cd ng-tadmin && sh docker/build/shell.sh ${Ver_Tag}"'
+                sh 'bash -c "sh build-tadmin.sh"'
                 
             }
         }
