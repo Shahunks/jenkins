@@ -1,4 +1,4 @@
-build-tadmin.shpipeline {
+pipeline {
     agent none
     stages {
      
@@ -38,7 +38,7 @@ build-tadmin.shpipeline {
             steps {
                
               
-                sh 'bash -c "sh build-tadmin.sh"'
+                sh 'bash -c "cd build-tadmin.sh "'
                 
             }
         }
@@ -93,7 +93,7 @@ build-tadmin.shpipeline {
             steps {
                
                 
-                sh 'bash -c "cd ng-api-server && sh shell.sh "'
+                sh 'bash -c "cd ng-api-server && sh build-api.sh "'
                 
             }
         }
