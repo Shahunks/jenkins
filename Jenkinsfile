@@ -26,7 +26,7 @@ pipeline {
                label "Agent2"
        }
             steps {
-                sh 'cd ng-api-server &&  ./node_modules/sonarqube-scanner/dist/bin/sonar-scanner  -Dsonar.sources=. -Dsonar.projectKey=ng-tadmin -Dsonar.password=72b9cad2dacc1cde8dc1eed5df24d3cb4a761938  -Dsonar.host.url=http://10.8.201.78:9000/ -Dsonar.exclusions=**node_modules** -Dsonar.eslint.reportPaths=report.json'
+                sh 'cd ng-tadmin &&  ./node_modules/sonarqube-scanner/dist/bin/sonar-scanner  -Dsonar.sources=. -Dsonar.projectKey=ng-tadmin -Dsonar.password=72b9cad2dacc1cde8dc1eed5df24d3cb4a761938  -Dsonar.host.url=http://10.8.201.78:9000/ -Dsonar.exclusions=**node_modules** -Dsonar.eslint.reportPaths=report.json'
             }  
            
            
