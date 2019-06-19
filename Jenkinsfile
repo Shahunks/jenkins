@@ -2,7 +2,8 @@ pipeline {
     agent none
     stages {
      
-      stage('Build-tadmin') {
+        
+        stage('Pre-tadmin') {
              agent {
                label "Agent2"
       }
@@ -10,12 +11,15 @@ pipeline {
                
                 checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f4a43310-1870-43ec-a51f-c52d8d8a396e', url: 'https://github.com/Shahunks/ng-tadmin-api-server-deployment.git']]])
               checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin/ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f4a43310-1870-43ec-a51f-c52d8d8a396e', url: 'https://github.com/Shahunks/ng-server-components-deployment.git']]])
-                sh 'bash -c "cd ng-tadmin && sh docker/build/shell.sh ${Ver_Tag}"'
-                
+               sh 'bash -c "cd ng-tadmin && rm -rf node_modules"'
+               sh 'bash -c "cd ng-tadmin && npm install"'
+               sh 'bash -c "cd ng-tadmin && npm install sonarqube-scanner"'
+               sh 'bash -c "cd ng-tadmin &&  npm install jest"'
             }
         }
-        
-         stage('Sonar-ngtadmin') {
+                
+                
+          stage('Sonar-ngtadmin') {
 
           agent {
                label "Agent2"
@@ -26,9 +30,22 @@ pipeline {
            
            
 } 
+        stage('Build-tadmin') {
+             agent {
+               label "Agent2"
+      }
+            steps {
+               
+               elativeTargetDir: 'ng-tadmin/ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f4a43310-1870-43ec-a51f-c52d8d8a396e', url: 'https://github.com/Shahunks/ng-server-components-deployment.git']]])
+                sh 'bash -c "cd ng-tadmin && sh docker/build/shell.sh ${Ver_Tag}"'
+                
+            }
+        }
+        
+       
     
      
-     stage('docker') {
+     stage('Pre-ng') {
             agent {
               label "Agent2"
      }
