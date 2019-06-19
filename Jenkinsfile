@@ -5,7 +5,7 @@ pipeline {
     stages {
      
         
-        stage('Pre-tadmin') {
+         stage('Pre-tadmin') {
             
             steps {
                
@@ -21,7 +21,7 @@ pipeline {
         }
                 
                 
-          stage('Sonar-ngtadmin') {
+        /*   stage('Sonar-ngtadmin') {
 
          
             steps {
@@ -49,7 +49,7 @@ pipeline {
                
            }
 }   
-           
+           */
 
         stage('Build-tadmin') {
              
@@ -81,7 +81,7 @@ pipeline {
                 
            }
 }
-         stage('sonar-ng-api') {
+     /*     stage('sonar-ng-api') {
 
          
             steps {
@@ -112,7 +112,7 @@ pipeline {
                
                
            }
-}   
+}   */
            
 
         stage('build-ngapi') {
