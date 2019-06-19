@@ -4,7 +4,7 @@ pipeline {
      
       stage('Build-tadmin') {
              agent {
-               label "Marathonlb"
+               label "docker"
       }
             steps {
                
@@ -15,17 +15,20 @@ pipeline {
             }
         }
         
-    
-        stage('Deploy-tadmin') {
-             agent {
-               label "Marathonlb"
-      }
+         stage('Sonar-ngtadmin') {
+
+          agent {
+               label "dockere"
+       }
             steps {
-               
-                sh 'bash -c "sh /opt/json/updatetadmin.sh"'  
-            }
-        }
-     stage('pre-ngapi') {
+                sh 'cd ng-api-server &&  ./node_modules/sonarqube-scanner/dist/bin/sonar-scanner  -Dsonar.sources=. -Dsonar.projectKey=ng-tadmin -Dsonar.password=72b9cad2dacc1cde8dc1eed5df24d3cb4a761938  -Dsonar.host.url=http://10.8.201.78:9000/ -Dsonar.exclusions=**node_modules** -Dsonar.eslint.reportPaths=report.json'
+            }  
+           
+           
+} 
+    
+     
+     stage('docker') {
             agent {
               label "dockere"
      }
@@ -43,7 +46,7 @@ pipeline {
                 
            }
 }
-         stage('Sonar-ngapi') {
+         stage('docker') {
 
           agent {
                label "dockere"
@@ -54,7 +57,7 @@ pipeline {
            
            
 } 
-         stage('test-ngapi') {
+         stage('docker') {
             agent {
               label "dockere"
      }
@@ -65,9 +68,9 @@ pipeline {
                
            }
 } 
-        stage('Build-ngapi') {
+        stage('docker') {
              agent {
-               label "Marathonlb"
+               label "dockere"
       }
             steps {
                
@@ -79,13 +82,5 @@ pipeline {
         }
         
 
-        stage('Deploy-ngapi') {
-             agent {
-               label "Marathonlb"
-      }
-            steps {
-                sh 'bash -c "sh /opt/json/updateapi.sh"'  
-            }
-        } 
-    }
+       
 }
