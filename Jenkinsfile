@@ -144,6 +144,9 @@ pipeline {
     }
         
         post {
+            agent {
+               label "Agent2"
+}
             always {
                junit keepLongStdio: true, testResults: 'ng-tadmin/eslint.xml'
            }
