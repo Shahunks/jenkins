@@ -1,12 +1,10 @@
 pipeline {
-    agent none
+    agent Agent2
     stages {
      
         
         stage('Pre-tadmin') {
-             agent {
-               label "Agent2"
-      }
+            
             steps {
                
                 checkout([$class: 'GitSCM', branches: [[name: '*/ng-248']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-tadmin-api-server.git']]])
@@ -20,7 +18,7 @@ pipeline {
         }
                 
                 
-         /* stage('Sonar-ngtadmin') {
+          stage('Sonar-ngtadmin') {
 
           agent {
                label "Agent2"
@@ -31,9 +29,7 @@ pipeline {
               
           }        
           stage('test-tadmin') {
-            agent {
-              label "Agent2"
-     } 
+            
            steps {
                 sh 'bash -c "sh kill.sh"'
                sh 'bash -c "sh  run.sh"'
@@ -53,7 +49,7 @@ pipeline {
                
                
            }
-}   */
+}   
            
 
         stage('Build-tadmin') {
@@ -72,9 +68,7 @@ pipeline {
     
      
      stage('Pre-ng') {
-            agent {
-              label "Agent2"
-     }
+         
            steps {
                
                checkout([$class: 'GitSCM', branches: [[name: '*/ng-248']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-api-server']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-api-server.git']]])
@@ -90,11 +84,9 @@ pipeline {
                 
            }
 }
-      /*   stage('sonar-ng-api') {
+         stage('sonar-ng-api') {
 
-          agent {
-               label "Agent2"
-       }
+         
             steps {
                 sh 'cd ng-api-server &&  ./node_modules/sonarqube-scanner/dist/bin/sonar-scanner  -Dsonar.sources=. -Dsonar.projectKey=ng-api -Dsonar.password=72b9cad2dacc1cde8dc1eed5df24d3cb4a761938  -Dsonar.host.url=http://10.8.201.78:9000/ -Dsonar.exclusions=**node_modules** -Dsonar.eslint.reportPaths=report.json'
             }  
@@ -102,9 +94,7 @@ pipeline {
            
 } 
         stage('test-api') {
-            agent {
-              label "Agent2"
-     }
+            
            steps {
                 sh 'bash -c "sh kill.sh"'
                sh 'bash -c "sh  run-apt.sh"'
@@ -117,9 +107,7 @@ pipeline {
         
         
          stage('eslint-api') {
-            agent {
-              label "Agent2"
-     }
+           
            steps {
                 sh 'bash -c "sh eslist-api.sh"'
                
@@ -127,13 +115,11 @@ pipeline {
                
                
            }
-}   */
+}   
            
 
         stage('build-ngapi') {
-             agent {
-               label "Agent2"
-      }
+           
             steps {
                
                 
@@ -144,11 +130,9 @@ pipeline {
     }
         
         post {
-            agent {
-               label "Agent2"
-}
             always {
-               junit keepLongStdio: true, testResults: 'ng-tadmin/eslint.xml'
+               recordIssues enabledForFailure: true, tools: [esLint(pattern: 'eslint.xml')]
+               junit 'junit.xml'
            }
             
     }
