@@ -51,9 +51,7 @@ pipeline {
            
 
         stage('Build-tadmin') {
-             agent {
-               label "Agent2"
-      }
+             
             steps {
                
               
