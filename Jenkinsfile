@@ -141,6 +141,8 @@ pipeline {
                 
             }
         }
+    }
+        
         post {
             always {
                recordIssues enabledForFailure: true, tools: [esLint(pattern: 'eslint.xml')]
