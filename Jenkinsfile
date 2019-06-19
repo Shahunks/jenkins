@@ -37,7 +37,6 @@ pipeline {
            steps {
                 sh 'bash -c "sh kill.sh"'
                sh 'bash -c "sh  run.sh"'
-              sh 'bash -c "sh kill.sh"'
               
                
                
@@ -51,7 +50,7 @@ pipeline {
                 sh 'bash -c "sh eslist-tadmin.sh"'
                
               
-               
+               junit keepLongStdio: true, testResults: 'ng-tadmin/eslint.xml'
                
            }
 }   
