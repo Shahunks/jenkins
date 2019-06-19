@@ -36,7 +36,7 @@ pipeline {
       }
             steps {
                
-               elativeTargetDir: 'ng-tadmin/ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f4a43310-1870-43ec-a51f-c52d8d8a396e', url: 'https://github.com/Shahunks/ng-server-components-deployment.git']]])
+              
                 sh 'bash -c "cd ng-tadmin && sh docker/build/shell.sh ${Ver_Tag}"'
                 
             }
@@ -91,9 +91,8 @@ pipeline {
       }
             steps {
                
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-api-server']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f4a43310-1870-43ec-a51f-c52d8d8a396e', url: 'https://github.com/Shahunks/ng-api-server.git']]])
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f4a43310-1870-43ec-a51f-c52d8d8a396e', url: 'https://github.com/Shahunks/ng-server-components.git']]])
-                sh 'bash -c "cd ng-api-server && sh ./docker/build/shell.sh ${Ver_Tag}"'
+                
+                sh 'bash -c "cd ng-api-server && sh ./docker/build/shell.sh "'
                 
             }
         }
