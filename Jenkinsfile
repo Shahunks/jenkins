@@ -145,8 +145,7 @@ pipeline {
         
         post {
             always {
-               recordIssues enabledForFailure: true, tools: [esLint(pattern: 'eslint.xml')]
-               junit 'junit.xml'
+               junit keepLongStdio: true, testResults: 'ng-tadmin/eslint.xml'
            }
             
     }
