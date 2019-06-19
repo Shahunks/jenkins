@@ -30,10 +30,10 @@ pipeline {
             }  
               
           }        
-         stage('test-tadmin') {
+    /*     stage('test-tadmin') {
             agent {
               label "Agent2"
-     }
+     } 
            steps {
                 sh 'bash -c "sh kill.sh"'
                sh 'bash -c "sh  run.sh"'
@@ -41,13 +41,13 @@ pipeline {
                
                
            }
-}   
+}     */
                stage('eslint-tadmin') {
             agent {
               label "Agent2"
      }
            steps {
-                sh 'bash -c "sh eslist-tadmin.sh"'
+                //sh 'bash -c "sh eslist-tadmin.sh"'
                
               
                junit keepLongStdio: true, testResults: 'ng-tadmin/eslint.xml'
