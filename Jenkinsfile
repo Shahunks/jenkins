@@ -9,7 +9,7 @@ pipeline {
       }
             steps {
                
-                checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-tadmin-api-server.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/ng-248']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-tadmin-api-server.git']]])
               checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin/ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
                 checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
                sh 'bash -c "cd ng-tadmin && rm -rf node_modules"'
@@ -52,7 +52,7 @@ pipeline {
      }
            steps {
                
-               checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-api-server']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-api-server.git']]])
+               checkout([$class: 'GitSCM', branches: [[name: '*/ng-248']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-api-server']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-api-server.git']]])
                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
                sh 'bash -c "cd ng-api-server && rm -rf node_modules"'
