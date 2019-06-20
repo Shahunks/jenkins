@@ -21,15 +21,19 @@ pipeline {
         }
                 
                 
-        /*   stage('Sonar-ngtadmin') {
-
-         
-            steps {
-                sh 'cd ng-tadmin &&  ./node_modules/sonarqube-scanner/dist/bin/sonar-scanner  -Dsonar.sources=. -Dsonar.projectKey=ng-tadmin -Dsonar.password=72b9cad2dacc1cde8dc1eed5df24d3cb4a761938  -Dsonar.host.url=http://10.8.201.78:9000/ -Dsonar.exclusions=**node_modules** -Dsonar.eslint.reportPaths=report.json'
+           stage('Sonar-ngtadmin') {
+                
+                steps {
+              
+         withSonarQubeEnv(credentialsId: '1ad395ba-03fc-4844-ae44-d0dc05d30a60') {
+     sh 'cd ng-tadmin &&  ./node_modules/sonarqube-scanner/dist/bin/sonar-scanner  -Dsonar.sources=. -Dsonar.projectKey=ng-tadmin -Dsonar.password=72b9cad2dacc1cde8dc1eed5df24d3cb4a761938  -Dsonar.host.url=http://10.8.201.78:9000/ -Dsonar.exclusions=**node_modules** -Dsonar.eslint.reportPaths=report.json'
+}
+            
+               
             }  
               
           }        
-          stage('test-tadmin') {
+         /* stage('test-tadmin') {
             
            steps {
                 sh 'bash -c "sh kill.sh"'
