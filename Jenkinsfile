@@ -110,7 +110,7 @@ pipeline {
          stage('eslint-api') {
            
            steps {
-                sh 'bash -c "cd ng-api-server ./node_modules/.bin/eslint . -f checkstyle  > eslint.xml"'
+                sh 'bash -c "cd ng-api-server && ./node_modules/.bin/eslint . -f checkstyle  > eslint.xml"'
                
               
                
