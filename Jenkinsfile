@@ -46,7 +46,7 @@ pipeline {
                stage('eslint-tadmin') {
            
            steps {
-                sh  "sh eslist-admin.sh"
+                sh  "sh eslist-tadmin.sh"
                
               
                
