@@ -46,7 +46,7 @@ pipeline {
                stage('eslint-tadmin') {
            
            steps {
-                sh  "cd ng-tadmin && ./node_modules/.bin/eslint . -f checkstyle"
+                sh  "sh eslist-admin.sh"
                
               
                
