@@ -1,0 +1,93 @@
+pipeline {
+     agent {
+              label "Agent2"
+     }
+    stages {
+     
+        
+         stage('Pre-tadmin') {
+            
+            steps {
+               
+                checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-tadmin-api-server.git']]])
+              checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin/ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
+               sh 'bash -c "cd ng-tadmin && rm -rf node_modules"'
+                 
+            }
+        }
+                
+                
+         
+  
+           
+
+        stage('Build-tadmin') {
+             
+            steps {
+               
+              
+                sh 'bash -c "sh build-tadmin.sh "'
+                
+            }
+        }
+        
+       stage('deploy-tadmin') {
+             
+            steps {
+               
+              
+                sh 'bash -c "sh /opt/json/updatetadmin.sh"'
+                
+            }
+        }
+        
+       
+    
+     
+     stage('Pre-ng') {
+         
+           steps {
+               
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-api-server']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-api-server.git']]])
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-api-server/ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
+               sh 'bash -c "cd ng-api-server && rm -rf node_modules"'
+              
+               
+               
+                
+                
+           }
+}
+         
+
+        stage('build-ngapi') {
+           
+            steps {
+               
+                
+                sh 'bash -c "sh build-api.sh "'
+                
+            }
+        
+    }
+        
+        post {
+            always {
+              recordIssues enabledForFailure: true, tools: [esLint(pattern: 'ng-tadmin/eslint.xml')]
+                
+           }
+            
+    }
+ stage('Build-deploy') {
+             
+            steps {
+               
+              
+                sh 'bash -c "/opt/json/updateapi.sh "'
+                
+            }
+        }
+   }    
+}
