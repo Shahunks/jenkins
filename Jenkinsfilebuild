@@ -73,13 +73,7 @@ pipeline {
         
     }
         
-        post {
-            always {
-              recordIssues enabledForFailure: true, tools: [esLint(pattern: 'ng-tadmin/eslint.xml')]
-                
-           }
-            
-    }
+       
  stage('Build-deploy') {
              
             steps {
