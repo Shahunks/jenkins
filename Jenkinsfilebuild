@@ -4,7 +4,7 @@ pipeline {
      }
      environment {
   VERSION = VersionNumber([
-    versionNumberString : '1.0     .${BUILD_ID}',
+    versionNumberString : '1.0.${BUILD_ID}',
     projectStartDate : '2014-05-19'
   ]);
 }
