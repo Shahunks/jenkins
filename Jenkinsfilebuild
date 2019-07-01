@@ -44,7 +44,7 @@ pipeline {
             }
         }
         
-       stage('deploy-tadmin') {
+       /*stage('deploy-tadmin') {
              
             steps {
                
@@ -94,6 +94,6 @@ pipeline {
                 sh 'bash -c "/opt/json/updateapi.sh "'
                 
             }
-        }
+        }*/
    }    
 }
