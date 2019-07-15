@@ -18,7 +18,7 @@ pipeline {
             
               
                sh 'bash -c "echo $VERSION"'
-                checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f4a43310-1870-43ec-a51f-c52d8d8a396e', url: 'https://github.com/Shahunks/ng-tadmin-api-server-deployment.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'a7d86431-4836-4ab2-a40a-742780e9f11e', url: 'https://github.com/Shahunks/ng-tadmin-api-server-deployment.git']]])
               checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-tadmin/ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
                 checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ng-server-components']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'db5ece3a-688e-4261-aa2d-b3023985cb47', url: 'https://github.com/imanagedev/ng-server-components.git']]])
                sh 'bash -c "cd ng-tadmin && rm -rf node_modules"'
@@ -76,7 +76,10 @@ pipeline {
             steps {
                
                 
-                sh 'bash -c "sh build-api.sh "'
+                sh 'bash -c "cd ng-tadmin && docker build  --no-cache -t ngregistry.imanagelabs.dev/ng-api-server:$VERSION  -f docker/build/Dockerfile . "'
+                sh 'bash -c "cd ng-tadmin && echo ngregistry.imanagelabs.dev/ng-api-server:$VERSION > ../imagename"'
+                sh 'bash -c "cd ng-tadmin && docker push ngregistry.imanagelabs.dev/ng-api-server:$VERSION"'
+                sh 'bash -c "cd ng-tadmin rmi ngregistry.imanagelabs.dev/ng-api-server:$VERSION"'
                 
             }
         
