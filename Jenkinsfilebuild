@@ -36,7 +36,6 @@ pipeline {
             steps {
                
                
-                sh 'bash -c "sh build.sh"'                          
                 sh 'bash -c "cd ng-tadmin && docker build  --no-cache -t ngregistry.imanagelabs.dev/ng-tadmin-api-server:$VERSION  -f docker/build/Dockerfile . "'
                 sh 'bash -c "cd ng-tadmin && echo ngregistry.imanagelabs.dev/ng-tadmin-api-server:$VERSION > ../imagename"'
                 sh 'bash -c "cd ng-tadmin && docker push ngregistry.imanagelabs.dev/ng-tadmin-api-server:$VERSION"'
@@ -51,7 +50,7 @@ pipeline {
             steps {
                
               
-                sh 'bash -c "sh /opt/json/updatetadmin.sh"'
+                sh 'bash -c "sh /opt/json/updateng-tadmin-gatkeeper.sh"'
                 
             }
         }
