@@ -42,8 +42,7 @@ pipeline {
                 sh 'bash -c "cd ng-tadmin rmi ngregistry.imanagelabs.dev/ng-tadmin-api-server:$VERSION"'
             }
         }
-    }
-}
+    
         
         stage('deploy-tadmin') {
              
@@ -95,5 +94,5 @@ pipeline {
                 
             }
         }
-       
+      }
 }
