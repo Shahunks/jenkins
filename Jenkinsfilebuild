@@ -45,7 +45,7 @@ pipeline {
     }
 }
         
-       /*stage('deploy-tadmin') {
+        stage('deploy-tadmin') {
              
             steps {
                
@@ -77,7 +77,7 @@ pipeline {
                
                 
                 sh 'bash -c "cd ng-tadmin && docker build  --no-cache -t ngregistry.imanagelabs.dev/ng-api-server:$VERSION  -f docker/build/Dockerfile . "'
-                sh 'bash -c "cd ng-tadmin && echo ngregistry.imanagelabs.dev/ng-api-server:$VERSION > ../imagename"'
+                sh 'bash -c "cd ng-tadmin && echo ngregistry.imanagelabs.dev/ng-api-server:$VERSION > ../imagenameapi"'
                 sh 'bash -c "cd ng-tadmin && docker push ngregistry.imanagelabs.dev/ng-api-server:$VERSION"'
                 sh 'bash -c "cd ng-tadmin rmi ngregistry.imanagelabs.dev/ng-api-server:$VERSION"'
                 
@@ -91,9 +91,9 @@ pipeline {
             steps {
                
               
-                sh 'bash -c "/opt/json/updateapi.sh "'
+                sh 'bash -c "/opt/json/updateng-api-gatkeeper.sh"'
                 
             }
         }
    }    
-}*/
+}
