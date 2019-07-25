@@ -134,7 +134,7 @@ pipeline {
         
         post {
             always {
-                 archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+                 archiveArtifacts artifacts: '*.jar', fingerprint: true
                  recordIssues enabledForFailure: true, tools: [esLint(pattern: 'ng-tadmin/eslint.xml')]
                 
            }
