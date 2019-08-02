@@ -2,6 +2,9 @@ pipeline {
      agent {
               label "Agent2"
      }
+      parameters {
+    gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
+  }
      environment {
   VERSION = VersionNumber([
     versionNumberString : '1.0.${BUILD_ID}',
